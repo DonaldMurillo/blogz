@@ -31,6 +31,14 @@ def index():
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
 
+    blog_id = request.args.get("id")
+    if request.method == "GET" and blog_id:
+        
+        blog = Blog.query.filter_by(id=blog_id).first()
+
+        return render_template("singleblog.html", blog=blog)
+
+
     if request.method == 'POST':
         
         blog_title = request.form['title']
@@ -47,6 +55,10 @@ def blog():
         db.session.add(new_blog)
         db.session.commit()
 
+        blog = Blog.query.filter_by(title=new_blog.title, body=new_blog.body).first()
+
+        return render_template("singleblog.html", blog=blog)
+
     blogs = Blog.query.all()
 
     return render_template('blog.html',title="Blog Post", 
@@ -58,7 +70,10 @@ def newblog():
     errors_dict = {"empty_body": False, "empty_title": False}
     return render_template("newblog.html" , errors =errors_dict)
 
-
+@app.route("/blog" , methods=["POST" , "GET"])
+def single_blog():
+    print(request.args.get("title"))
+    return 
 
 if __name__ == '__main__':
     app.run()
