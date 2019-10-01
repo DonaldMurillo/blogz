@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Add a Blog Entry</h1>
+    <form method='post' action="/blog">
+        <label>
+            title for your new Blog:
+            <br>
+            <input type="text" name='title' />
+        </label>
+        {% if errors["empty_title"] %}
+        <br>
+        Please fill the title
+        {% endif %}
+        <br><br><br>
+        <label>
+            Your new Blog:
+            <br>
+            <textarea name="body" id="body" cols="30" rows="10"></textarea>
+        </label>
+        {% if errors["empty_body"] %}
+        <br>
+        Please fill the body
+        {% endif %}
+        <br><br>
+        <input type="submit" value='Add Entry' />
+    </form>
+
+
+
+{% endblock %}
