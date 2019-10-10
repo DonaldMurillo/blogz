@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Signup</h1>
+    <form method="POST">
+        <label>
+            Username
+
+        {% if not is_verified %}
+            {% if new_signup.has_data %}
+            <input type="text" name="username" value="{{new_signup.user_name}}" />
+            {% endif %}
+            {% else%}
+            <input type="text" name="username" />
+        {% endif %}
+
+        </label>
+
+        {% if not is_verified %}
+            {% if new_signup.errors["username_is_empty"] %}
+            username cannot be empty, username has to be more 3 characters and less than 20
+            {% elif new_signup.errors["username_bad_length"] %}
+            username has to be more 3 characters and less than 20
+            {% elif new_signup.errors["user_exists"] %}
+            this user is already taken
+            {% endif %}
+        {% endif %}
+
+        <br>
+        <label>
+                Password
+                <input type="password" name="password"  />
+        </label>  
+
+        {% if not is_verified %}
+            {% if new_signup.errors["password_is_empty"] %}
+            password cannot be empty, password has to be more 3 characters and less than 20
+            {% elif new_signup.errors["password_bad_length"] %}
+            password has to be more 3 characters and less than 20
+            {% endif %}      
+        {% endif %} 
+        <br>
+        <label>
+                Verify Password
+                <input type="password" name="veripassword" />
+        </label>
+        {% if not is_verified %}
+            {% if not new_signup.is_verified %}
+            The passwords do not march
+            {% endif %}
+        {% endif %}
+        <br>
+        <label>
+                Email (Optional)
+
+        {% if not is_verified %}
+            {% if new_signup.has_data %}
+            <input type="text" name="email" value="{{new_signup.email}}" />
+            {% endif %}
+            {% else%}
+            <input type="text" name="email" />
+        {% endif %}
+
+        
+        {% if not is_verified %}
+            {% if new_signup.errors["email_invalid_char"] %}
+            invalid email, make sure there are no spaces, extra @ or dot
+            {% endif %}   
+        {% endif %}
+        <br>
+
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <ul>
+        {% for task in completed_tasks %}
+        <li>{{task.name}}
+            <!-- <form method="POST" action="/delete_task" style="display:inline-block">
+                <input type="hidden" name="task_id" value="{{task.id}}">
+                <input type="submit" value="Done!">
+            </form> -->
+        </li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}
