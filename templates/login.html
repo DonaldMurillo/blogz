@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Login</h1>
+    <form method="POST" >
+        <label>
+            Username: 
+
+        {% if not is_verified %}
+            {% if new_login["username"] != "" %}
+            <input type="text" name="username" value="{{ new_login['username'] }}" />
+            {% endif %}
+            {% else%}
+            <input type="text" name="username" />
+        {% endif %}
+
+        </label>
+
+        {% if not is_verified %}
+            {% if not new_login_user %}
+            user does not exist
+            {% elif bad_user_pass %}
+            username or password incorrect, plese try again
+            {% endif %}
+        {% endif %}
+
+        <br>
+        <label>
+                Password: 
+                <input type="password" name="password"  />
+        </label>  
+
+        {% if not is_verified %}
+            {% if new_login_user == "None" %}
+            password cannot be empty, password has to be more 3 characters and less than 20
+            {% endif %}      
+        {% endif %} 
+        <br>
+
+        <input type="submit" value="Submit">
+        <br>
+        <br>
+        Don't have an account click <a href="signup">Create account</a>
+    </form>
+
+
+{% endblock %}

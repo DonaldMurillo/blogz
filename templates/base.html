@@ -5,8 +5,15 @@
     </head>
     <header>
         <nav>
-            <a href="blog">Main Blog Page</a> |
-            <a href= "newblog">Add a Blog</a> |
+            <a href="/">Home</a> |
+            <a href="blog">Main Blog Page</a> | 
+            <a href= "newblog">Add a Blog</a> | 
+            {% if session.get("username") != None %}
+            <a href= "logout">Logout</a> | Welcome {{ session["username"] }}
+            {% else %}
+            <a href= "login">Login</a>
+            {% endif %}
+            <!-- <a href= "login">Logout</a> | -->
             <!-- <a href="/js/">JavaScript</a> |
             <a href="/jquery/">jQuery</a> -->
           </nav>

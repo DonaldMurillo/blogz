@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Blogz User</h1>
+
+    {% if users|length == 0 %}
+    <p>No users yet</p>
+    {% else %}
+
+        {% for user in users %}
+        <div>
+            <ul>
+                <input type="hidden" name="{{user.id}}" id="{{user.id}}">
+                <h2><a href="/?id={{user.id}}">{{ user.username }}</li>
+            </ul>
+            <!-- <input type="hidden" name="{{user.id}}" id="{{user.id}}">
+            {% for user in users%}
+                {% if user.id == user.owner_id %}
+                    <h2><a href="/user?id={{user.id}}">{{user.title}}</a> by - {{ user.username }}</h2>
+                    <p>{{user.body}}</p>
+                {% endif %}
+            {% endfor %} -->
+        </div>
+        <hr />
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

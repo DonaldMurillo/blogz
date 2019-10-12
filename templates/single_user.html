@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Blogz </h1>
+    <br>
+    <span>We found {{blogs|length}} for this {{user.username}}</span> 
+    <br>
+    {% if blogs|length == 0 %}
+    <p>No blogs yet</p>
+    {% else %}
+
+        {% for blog in blogs %}
+        
+        <div>
+            <input type="hidden" name="{{blog.id}}" id="{{blog.id}}">
+            <h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
+            <p>{{blog.body}}</p>
+
+        </div>
+        <hr />
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

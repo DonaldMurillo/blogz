@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Build a Blog</h1>
+    <h1>Blogz</h1>
 
     {% if blogs|length == 0 %}
     <p>No blogs yet</p>
@@ -9,10 +9,16 @@
 
         {% for blog in blogs %}
         <div>
+            
             <input type="hidden" name="{{blog.id}}" id="{{blog.id}}">
-            <h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a></h2>
-            <p>{{blog.body}}</p>
+            {% for user in users%}
+                {% if user.id == blog.owner_id %}
+                    <h2><a href="/blog?id={{blog.id}}">{{blog.title}}</a> by - <a href="/blog?owner_id={{user.id}}">{{ user.username }}</a></h2>
+                    <p>{{blog.body}}</p>
+                {% endif %}
 
+
+            {% endfor %}
         </div>
         <hr />
         {% endfor %}

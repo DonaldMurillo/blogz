@@ -4,7 +4,7 @@
     <h1>Signup</h1>
     <form method="POST">
         <label>
-            Username
+            Username: 
 
         {% if not is_verified %}
             {% if new_signup.has_data %}
@@ -18,9 +18,9 @@
 
         {% if not is_verified %}
             {% if new_signup.errors["username_is_empty"] %}
-            username cannot be empty, username has to be more 3 characters and less than 20
+            username cannot be empty, username has to be more 3 characters
             {% elif new_signup.errors["username_bad_length"] %}
-            username has to be more 3 characters and less than 20
+            username has to be more 3 characters 
             {% elif new_signup.errors["user_exists"] %}
             this user is already taken
             {% endif %}
@@ -28,15 +28,15 @@
 
         <br>
         <label>
-                Password
+                Password: 
                 <input type="password" name="password"  />
         </label>  
 
         {% if not is_verified %}
             {% if new_signup.errors["password_is_empty"] %}
-            password cannot be empty, password has to be more 3 characters and less than 20
+            password cannot be empty, password has to be more 3 characters
             {% elif new_signup.errors["password_bad_length"] %}
-            password has to be more 3 characters and less than 20
+            password has to be more 3 characters 
             {% endif %}      
         {% endif %} 
         <br>
@@ -50,7 +50,7 @@
             {% endif %}
         {% endif %}
         <br>
-        <label>
+        <!-- <label>
                 Email (Optional)
 
         {% if not is_verified %}
@@ -67,6 +67,7 @@
             invalid email, make sure there are no spaces, extra @ or dot
             {% endif %}   
         {% endif %}
+        </label> -->
         <br>
 
 
